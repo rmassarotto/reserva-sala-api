@@ -7,7 +7,7 @@ const database = {};
 
 const options = {
   username: 'postgres',
-  password: '4093047',
+  password: '',
   host: 'localhost',
   dialect: 'postgres'
 };
