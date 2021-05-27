@@ -5,6 +5,7 @@ const _Usuario = require('./usuario')
 
 const database = {};
 
+//CONFIGURACOES DE BANCO
 const options = {
   username: 'postgres',
   password: '',
