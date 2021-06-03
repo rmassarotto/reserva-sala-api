@@ -34,16 +34,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   );
 
-  Reserva.associate = function (models) {
-    this.belongsTo(models.Usuario, {
-      as: 'usuario',
-      foreignKey: 'usuarioId'
-    }),
-      this.belongsTo(models.Sala, {
-        as: 'sala',
-        foreignKey: 'salaId'
-      })
-  }
-
   return Reserva
 }

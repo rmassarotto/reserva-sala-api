@@ -30,12 +30,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   );
 
-  Usuario.associate = function (models) {
-    this.hasMany(models.Reserva, {
-      as: 'reserva',
-      foreignKey: 'usuarioId'
-    })
-  }
-
   return Usuario
 }

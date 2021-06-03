@@ -18,12 +18,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   );
 
-  Sala.associate = function (models) {
-    this.hasMany(models.Reserva, {
-      as: 'reserva',
-      foreignKey: 'salaId'
-    })
-  }
-
   return Sala
 }

@@ -3,7 +3,7 @@ const _Reserva = require('./reserva')
 const _Sala = require('./sala')
 const _Usuario = require('./usuario')
 
-const database = {};
+let database = {};
 
 //CONFIGURACOES DE BANCO
 const options = {
@@ -23,9 +23,16 @@ let Reserva = _Reserva(sequelize, DataTypes);
 let Sala = _Sala(sequelize, DataTypes);
 let Usuario = _Usuario(sequelize, DataTypes);
 
-database['Reserva'] = Reserva;
-database['Sala'] = Sala;
-database['Usuario'] = Usuario;
+Reserva.belongsTo(Usuario, { as: 'usuario', foreignKey: 'usuarioId' });
+Reserva.belongsTo(Sala, { as: 'sala', foreignKey: 'salaId' });
+Sala.hasMany(Reserva, { as: 'reserva', foreignKey: 'salaId' });
+Usuario.hasMany(Reserva, { as: 'reserva', foreignKey: 'usuarioId' });
+
+database = {
+  Reserva,
+  Sala,
+  Usuario
+};
 
 database.sequelize = sequelize
 

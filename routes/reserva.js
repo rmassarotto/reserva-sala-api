@@ -2,11 +2,18 @@ const { Router } = require('express');
 const router = Router()
 const { Reserva } = require('../model');
 const controller = require('../controller/default');
+const reservaController = require('../controller/reserva');
 
 router.get('/:id?', async (req, res) => {
   const { id } = req.params;
-  const reservas = await controller.get(id, Reserva)
+  const reservas = await reservaController.get(id, Reserva)
   res.send(reservas || [])
+});
+
+router.get('/:data/:salaId/:inicio/:fim', async (req, res) => {
+  const { data, salaId, inicio, fim } = req.params;
+  const reservas = await reservaController.getConflitoReserva(data, salaId, inicio, fim)
+  res.send(reservas ? true : false)
 });
 
 router.post('/', async (req, res) => {
