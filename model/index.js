@@ -8,7 +8,7 @@ let database = {};
 //CONFIGURACOES DE BANCO
 const options = {
   username: 'postgres',
-  password: '',
+  password: '4093047',
   host: 'localhost',
   dialect: 'postgres'
 };

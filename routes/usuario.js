@@ -1,49 +1,43 @@
 const { Router } = require('express');
-const router = Router()
-const { Usuario } = require('../model');
+const jwt = require('jsonwebtoken');
+const router = Router();
 const controller = require('../controller/default');
+const { Usuario } = require('../model');
 
-router.get('/:id?', async (req, res) => {
-  const { id } = req.params;
-  const usuarios = await controller.get(id, Usuario)
-  res.send(usuarios || [])
+router.get('/', async (req, res) => {
+  const { authorization } = req.headers;
+
+  const { id } = jwt.decode(authorization);
+
+  const usuario = await controller.get(id, Usuario);
+
+  res.send(usuario);
 });
 
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
   try {
-    const { body } = req
+    const { body, token } = req;
 
-    const usuario = await controller.save(body, Usuario);
+    const { id } = jwt.decode(token);
 
-    res.send(usuario)
-  } catch (error) {
-    res.status(500).send({ error })
-  }
-});
-
-router.put('/:id', async (req, res) => {
-  try {
-    const { body } = req;
-    const { id } = req.params
-
-    const usuario = await controller.edit(id, body, Usuario)
+    const usuario = await controller.edit(Usuario, body, id);
 
     res.send(usuario);
   } catch (error) {
-    res.status(500).send({ error })
+    res.status(500).send({ error });
   }
 });
 
 router.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
-    await controller.delete(id, Usuario);
+    await controller.remove(Usuario, id);
 
-    res.send(id)
+    res.send({ id });
   } catch (error) {
-    res.status(500).send({ error })
+    res.status(500).send({ error });
   }
 });
 
-module.exports = router
+module.exports = router;

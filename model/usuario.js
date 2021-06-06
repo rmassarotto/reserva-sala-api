@@ -26,7 +26,17 @@ module.exports = function (sequelize, DataTypes) {
     },
     {
       tableName: 'res_usuario',
-      timestamps: false //createdAt
+      timestamps: false, //createdAt
+      defaultScope: {
+        attributes: {
+          exclude: ['senha'],
+        },
+      },
+      scopes: {
+        login: {
+          attributes: ['id', 'senha'],
+        },
+      },
     }
   );
 

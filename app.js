@@ -7,6 +7,7 @@ const port = 3005;
 const reserva = require('./routes/reserva');
 const sala = require('./routes/sala');
 const usuario = require('./routes/usuario');
+const login = require('./routes/login');
 
 app.use(
   cors({
@@ -15,6 +16,7 @@ app.use(
 );
 app.use(bodyParser.json());
 
+app.use('/login', login)
 app.use('/reserva', reserva)
 app.use('/sala', sala)
 app.use('/usuario', usuario)
