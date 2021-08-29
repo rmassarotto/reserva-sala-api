@@ -1,5 +1,4 @@
-﻿# NODEJS-API
-
+﻿# Projeto - Reserva de salas API
 Configuracoes de banco em: model/index.js
 
 ```bash
