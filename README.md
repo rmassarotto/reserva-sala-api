@@ -1,4 +1,4 @@
-﻿# NODEJS-API-MODELO
+﻿# NODEJS-API
 
 Configuracoes de banco em: model/index.js
 
